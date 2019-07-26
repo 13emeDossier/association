@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Menus\Traits\MenusTrait;
 
 class HomeController extends Controller
 {
