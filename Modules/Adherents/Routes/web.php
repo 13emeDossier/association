@@ -12,5 +12,5 @@
 */
 
 Route::prefix('adherents')->group(function() {
-    Route::get('/', 'AdherentsController@index');
+    Route::get('/', 'AdherentsController@index')->name('adherents');
 });

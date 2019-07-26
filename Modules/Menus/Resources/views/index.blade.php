@@ -2,19 +2,20 @@
                     <ul class="navbar-nav mr-auto">
                         <!-- Menu -->
                         @foreach($items as $item)
-                            @if(count($item['children'])==0)<li class="nav-item">@endif
-                            @if(count($item['children'])>0)<li class="nav-item dropdown">@endif
+                            @if(@count($item['children'])==0)<li class="nav-item">@endif
+                            @if(@count($item['children'])>0)<li class="nav-item dropdown">@endif
                                 
                             
-                                @if(count($item['type'])==0)<a class="nav-link" href="{{ route($item['url']) }}">{{ $item->title }}</a>@endif
-                                @if(count($item['type'])==1)<a class="nav-link" href="{{ $item['url'] }}">{{ $item->title }}</a>@endif
-                                
+                                @if($item['type']==0)<a class="nav-link" href="{{ route($item['url']) }}">{{ $item->label }}</a>@endif
+                                @if($item['type']==1)<a class="nav-link" href="{{ $item['url'] }}">{{ $item->label }}</a>@endif
+                                @if(@count($item['children'])>0)
                                 <li class="nav-item">
                                     @foreach($item['children'] as $child)
-                                        @if(count($item['type'])==0)<a class="nav-link" href="{{ route($item['url']) }}">{{ $item->title }}</a>@endif
-                                        @if(count($item['type'])==1)<a class="nav-link" href="{{ $item['url'] }}">{{ $item->title }}</a>@endif
+                                        @if($item['type']==0)<a class="nav-link" href="{{ route($item['url']) }}">{{ $item->label }}</a>@endif
+                                        @if($item['type']==1)<a class="nav-link" href="{{ $item['url'] }}">{{ $item->label }}</a>@endif
                                     @endforeach        
                                 </li>
+                                @endif
                             </li>
                         @endforeach
 
