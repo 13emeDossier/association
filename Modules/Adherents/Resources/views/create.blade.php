@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title') Adherents @endsection
+@section('title') Nouvel adherent @endsection
 
 @section('content')
     <p>
         <div>
-            <a href="{{route('adherents')}}">Retour liste des Adherents</a>
+            <a href="{{route('adherents')}}">Retour liste des adherent</a>
         </div>
         <form id="adherent_create_form" action="{{route('adherentsStore')}}" method="post" >
             @csrf

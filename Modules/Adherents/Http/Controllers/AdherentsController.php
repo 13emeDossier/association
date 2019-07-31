@@ -54,9 +54,10 @@ class AdherentsController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show(Adherent $adherent)
+    public function show(int $id)
     {
-        return view('adherents::show');
+        $adherent = Adherent::find($id);
+        return view('adherents::show')->withAdherent($adherent);
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Adherents @endsection
+@section('title') Liste des adherents @endsection
 
 @section('content')
     <p>
@@ -37,7 +37,7 @@
                             {{ $mail->email }} ({{ $mail->usage }})<br>
                         @endforeach
                     </td>
-                    <td><a href="">Fiche</a></td>
+                    <td><a href="route('adherentsCreate', ['id'=>$adherent->id])">Fiche</a></td>
                 </tr>
             @endForeach
             </tbody>
