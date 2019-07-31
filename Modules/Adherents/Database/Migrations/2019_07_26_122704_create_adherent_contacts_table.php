@@ -17,15 +17,15 @@ class CreateAdherentContactsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('adherent_id');
 
-            $table->string('name',255);
-            $table->string('firstname',255);
-            $table->string('quality',255);
-            $table->string('street_number',255);
-            $table->string('street',255);
-            $table->string('zip',255);
-            $table->string('city',255);
-            $table->string('phone_number',255);
-            $table->string('mobile_number',255);
+            $table->string('name',255)->nullable(true);
+            $table->string('firstname',255)->nullable(true);
+            $table->string('quality',255)->nullable(true);
+            $table->string('street_number',255)->nullable(true);
+            $table->string('street',255)->nullable(true);
+            $table->string('zip',255)->nullable(true);
+            $table->string('city',255)->nullable(true);
+            $table->string('phone_number',255)->nullable(true);
+            $table->string('mobile_number',255)->nullable(true);
             $table->timestamps();
         });
     }

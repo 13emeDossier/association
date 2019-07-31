@@ -5,6 +5,8 @@ namespace Modules\Adherents\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Adherents\Entities\Adherent;
+use Modules\Adherents\Http\Requests\AdherentsCreateRequest;
 
 class AdherentsController extends Controller
 {
@@ -14,7 +16,8 @@ class AdherentsController extends Controller
      */
     public function index()
     {
-        return view('adherents::index');
+        $adherentList=Adherent::all();
+        return view('adherents::index')->withAdherentList($adherentList);
     }
 
     /**
@@ -31,9 +34,19 @@ class AdherentsController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(AdherentsCreateRequest $request)
     {
-        //
+        $adherent = new Adherent();
+        $adherent->name             =$request->name;
+        $adherent->firstname        =$request->firstname;
+        $adherent->street_number    =$request->street_number;
+        $adherent->street           =$request->street;
+        $adherent->zip              =$request->zip;
+        $adherent->city             =$request->city;
+        $adherent->mobile_number    =$request->mobile_number;
+        $adherent->phone_number     =$request->phone_number;
+        $adherent->save();
+        return redirect('adherents');
     }
 
     /**
@@ -41,7 +54,7 @@ class AdherentsController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show(Adherent $adherent)
     {
         return view('adherents::show');
     }
@@ -51,7 +64,7 @@ class AdherentsController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Adherent $adherent)
     {
         return view('adherents::edit');
     }
@@ -62,7 +75,7 @@ class AdherentsController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Adherent $adherent)
     {
         //
     }

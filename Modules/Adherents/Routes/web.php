@@ -13,4 +13,7 @@
 
 Route::prefix('adherents')->group(function() {
     Route::get('/', 'AdherentsController@index')->name('adherents');
+    
+    Route::get('/create', 'AdherentsController@create')->name('adherentsCreate');
+    Route::post('/store', 'AdherentsController@store')->name('adherentsStore');
 });
