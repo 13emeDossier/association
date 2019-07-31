@@ -4,7 +4,7 @@
 @section('content')
     <p>
         <div>
-            <a href="{{route('adherents')}}">Retour liste des adherent</a>
+            <a href="{{ route('adherents') }}">Retour liste des adherent</a>
         </div>
         <div>
             <span>Nom : </span><span>{{$adherent->name}}</span><br>
@@ -17,7 +17,7 @@
             <span>Ville : </span><span>{{$adherent->city}}</span><br>     
         </div>
         <div>
-            <a href="{{route('adherentEdit')}}">Editer adherent</a>
+            <a href="{{ route('adherentsEdit',['id'=>$adherent->id]) }}">Editer adherent</a>
         </div>
     </p>
 @stop

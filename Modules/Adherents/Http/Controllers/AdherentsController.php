@@ -16,7 +16,7 @@ class AdherentsController extends Controller
      */
     public function index()
     {
-        $adherentList=Adherent::all();
+        $adherentList=Adherent::where('is_archived','=',0)->get();
         return view('adherents::index')->withAdherentList($adherentList);
     }
 
@@ -37,6 +37,7 @@ class AdherentsController extends Controller
     public function store(AdherentsCreateRequest $request)
     {
         $adherent = new Adherent();
+        $adherent->is_archived=0;
         $adherent->name             =$request->name;
         $adherent->firstname        =$request->firstname;
         $adherent->street_number    =$request->street_number;
@@ -57,6 +58,8 @@ class AdherentsController extends Controller
     public function show(int $id)
     {
         $adherent = Adherent::find($id);
+        if($adherent->is_archived==1)
+            abort(403, 'Interdit.');
         return view('adherents::show')->withAdherent($adherent);
     }
 
@@ -65,9 +68,13 @@ class AdherentsController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit(Adherent $adherent)
+    public function edit(int $id)
     {
-        return view('adherents::edit');
+        
+        $adherent = Adherent::find($id);
+        if($adherent->is_archived==1)
+            abort(403, 'Interdit.');
+        return view('adherents::edit')->withAdherent($adherent);
     }
 
     /**
@@ -76,9 +83,21 @@ class AdherentsController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Adherent $adherent)
+    public function update(AdherentsCreateRequest $request)
     {
-        //
+        $adherent = Adherent::find($request->id);
+        if($adherent->is_archived==1)
+            abort(403, 'Interdit.');
+        $adherent->name             =$request->name;
+        $adherent->firstname        =$request->firstname;
+        $adherent->street_number    =$request->street_number;
+        $adherent->street           =$request->street;
+        $adherent->zip              =$request->zip;
+        $adherent->city             =$request->city;
+        $adherent->mobile_number    =$request->mobile_number;
+        $adherent->phone_number     =$request->phone_number;
+        $adherent->update();
+        return redirect(route('adherentsShow',['id'=>$adherent->id]) );
     }
 
     /**
@@ -89,5 +108,12 @@ class AdherentsController extends Controller
     public function destroy($id)
     {
         //
+        $adherent = Adherent::find($id);
+        if($adherent->is_archived==1)
+            abort(403, 'Interdit.');
+        $adherent->is_archived=1;
+        $adherent->update();
+        return redirect('adherents');
+
     }
 }

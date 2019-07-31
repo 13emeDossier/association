@@ -27,8 +27,8 @@
                     <td>{{ $adherent->adhesions()->where('year','=',date('Y'))->first()}}</td>
                     <td>{{ $adherent->name }}</td>
                     <td>{{ $adherent->firstname }}</td>
-                    <td>Telephone Fixe</td>
-                    <td>Telephone Mobile</td>
+                    <td>{{ $adherent->phone_number }}</td>
+                    <td>{{ $adherent->mobile_number }}</td>
                     <td>{{ $adherent->street_number }} {{ $adherent->street }}</td>
                     <td>{{ $adherent->zip }}</td>
                     <td>{{ $adherent->city }}</td>
@@ -37,7 +37,10 @@
                             {{ $mail->email }} ({{ $mail->usage }})<br>
                         @endforeach
                     </td>
-                    <td><a href="route('adherentsCreate', ['id'=>$adherent->id])">Fiche</a></td>
+                    <td>
+                        <a href="{{ route('adherentsShow', ['id'=>$adherent->id]) }}">Details</a>
+                        <a href="{{ route('adherentsDestroy', ['id'=>$adherent->id]) }}">Archiver</a>
+                    </td>
                 </tr>
             @endForeach
             </tbody>
