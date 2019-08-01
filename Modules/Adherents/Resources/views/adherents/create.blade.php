@@ -6,20 +6,43 @@
         <div>
             <a href="{{route('adherents.index')}}">Retour liste des adherent</a>
         </div>
-        <form id="adherent_create_form" action="{{route('adherents.store')}}" method="post" >
-            @csrf
-            @foreach ($errors->all() as $error)
-                <p class="error">{{ $error }}</p>
-            @endforeach
-            <label>Nom</label><input name="name"><br>
-            <label>Prenom</label><input name="firstname"><br>
-            <label>Telephone Fixe</label><input name="phone_number"><br>
-            <label>Telephone Mobile</label><input name="mobile_number"><br>
-            <label>Numero de rue</label><input name="street_number"><br>
-            <label>Nom de rue</label><input name="street"><br>
-            <label>Code postal</label><input name="zip"><br>
-            <label>Ville</label><input name="city"><br>
-            <input value="Enregistrer" type="submit">       
-        </form>
+        {{ html()->form('POST',route('adherents.store'))->open() }}
+            {{ html()->div()->class('form-elem')->open() }}
+                {{ html()->label('name','name') }} 
+                {{ html()->text('name') }} 
+            {{ html()->div()->close() }}
+            {{ html()->div()->class('form-elem')->open() }}
+                {{ html()->label('name','firstname') }} 
+                {{ html()->text('firstname') }}
+            {{ html()->div()->close() }}
+            {{ html()->div()->class('form-elem')->open() }}   
+                {{ html()->label('name','street_number') }} 
+                {{ html()->text('street_number') }}
+            {{ html()->div()->close() }}
+            {{ html()->div()->class('form-elem')->open() }}
+                {{ html()->label('name','street') }} 
+                {{ html()->text('street') }}
+            {{ html()->div()->close() }}
+            {{ html()->div()->class('form-elem')->open() }}
+                {{ html()->label('name','zip') }} 
+                {{ html()->text('zip') }}
+            {{ html()->div()->close() }}
+            {{ html()->div()->class('form-elem')->open() }}
+                {{ html()->label('name','city') }} 
+                {{ html()->text('city') }}
+            {{ html()->div()->close() }}
+            {{ html()->div()->class('form-elem')->open() }} 
+                {{ html()->label('name','phone_number') }} 
+                {{ html()->text('phone_number') }}
+            {{ html()->div()->close() }}
+            {{ html()->div()->class('form-elem')->open() }} 
+                {{ html()->label('name','mobile_number') }} 
+                {{ html()->text('mobile_number') }}
+            {{ html()->div()->close() }}
+            {{ html()->div()->class('form-submit') }} 
+                {{ html()->input('submit','submit','Enregistrer') }}
+            {{ html()->div()->close() }}
+            
+        {{ html()->form()->close() }}   
     </p>
 @endsection

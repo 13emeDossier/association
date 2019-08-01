@@ -36,16 +36,7 @@ class AdherentController extends Controller
      */
     public function store(AdherentsCreateRequest $request)
     {
-        Adherent::create([
-            'name'=>$request->name,
-            'firstname'=>$request->firstname,
-            'street_number'=>$request->street_number,
-            'street'=>$request->street,
-            'zip'=>$request->zip,
-            'city'=>$request->city,
-            'phone_number'=>$request->phone_number,
-            'mobile_number'=>$request->mobile_number
-        ]);
+        Adherent::create($request->all());
         return redirect(route('adherents.index'));
     }
 
@@ -83,16 +74,7 @@ class AdherentController extends Controller
     {
         if($adherent->trashed())
             abort(403, 'Interdit.');
-        $adherent->update([
-            'name'=>$request->name,
-            'firstname'=>$request->firstname,
-            'street_number'=>$request->street_number,
-            'street'=>$request->street,
-            'zip'=>$request->zip,
-            'city'=>$request->city,
-            'phone_number'=>$request->phone_number,
-            'mobile_number'=>$request->mobile_number
-        ]);
+        $adherent->update($request->all());
         return redirect(route('adherents.index') );
     }
 
