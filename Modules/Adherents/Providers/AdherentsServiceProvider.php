@@ -2,11 +2,19 @@
 
 namespace Modules\Adherents\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Adherents\Policies\AdherentPolicy;
+use Modules\Adherents\Entities\Adherent;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AdherentsServiceProvider extends ServiceProvider
 {
+    protected $policies = [
+        //'App\Model' => 'App\Policies\ModelPolicy',
+        'Modules\Adherents\Entities\Adherent::class' => 'Modules\Adherents\Policies\AdherentPolicy::class',
+    ];
+
     /**
      * Boot the application events.
      *
@@ -19,6 +27,7 @@ class AdherentsServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->registerPolicies();
     }
 
     /**

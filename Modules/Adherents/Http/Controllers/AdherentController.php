@@ -4,12 +4,23 @@ namespace Modules\Adherents\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Modules\Adherents\Models\Adherent;
 use Modules\Adherents\Http\Requests\AdherentsCreateRequest;
+use App\Http\Controllers\Controller as AppController;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class AdherentController extends Controller
+class AdherentController extends AppController
 {
+    use AuthorizesRequests;
+    
+    function __construct() {
+        $this->middleware('can:view,adherent');
+        $this->middleware('can:create,adherent');
+        $this->middleware('can:update,adherent');
+        $this->middleware('can:delete,adherent');
+    }
+
+
     /**
      * Display a listing of the resource.
      * @return Response
@@ -26,6 +37,7 @@ class AdherentController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Adherent::class);
         return view('adherents::adherents.create');
     }
 
@@ -36,6 +48,7 @@ class AdherentController extends Controller
      */
     public function store(AdherentsCreateRequest $request)
     {
+        $this->authorize('create', Adherent::class);
         Adherent::create($request->all());
         return redirect(route('adherents.index'));
     }
@@ -47,8 +60,7 @@ class AdherentController extends Controller
      */
     public function show(Adherent $adherent)
     {
-        if($adherent->trashed())
-            abort(403, 'Interdit.');
+        $this->authorize('view', $adherent);
         return view('adherents::adherents.show')->withAdherent($adherent);
     }
 
@@ -59,8 +71,7 @@ class AdherentController extends Controller
      */
     public function edit(Adherent $adherent)
     {
-        if($adherent->trashed())
-            abort(403, 'Interdit.');
+        $this->authorize('update', $adherent);
         return view('adherents::adherents.edit')->withAdherent($adherent);
     }
 
@@ -72,8 +83,7 @@ class AdherentController extends Controller
      */
     public function update(AdherentsCreateRequest $request, Adherent $adherent)
     {
-        if($adherent->trashed())
-            abort(403, 'Interdit.');
+        $this->authorize('update', $adherent);
         $adherent->update($request->all());
         return redirect(route('adherents.index') );
     }
@@ -85,9 +95,8 @@ class AdherentController extends Controller
      */
     public function destroy(Adherent $adherent)
     {
-        if($adherent->trashed())
-            abort(403, 'Interdit.');
-        $adherent->delete();
+        $this->authorize('delete', $adherent);
+        $adherent->runSoftDelete();
         return redirect(route('adherents.index'));
 
     }

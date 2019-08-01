@@ -3,9 +3,11 @@
 
 @section('content')
     <p>
-        <div>
-            <a href="{{route('adherents.create')}}">Nouvel Adherent</a>
-        </div>
+        @can('create', Modules\Adherents\Models\Adherent::class)
+            <div>
+                <a href="{{route('adherents.create')}}">Nouvel Adherent</a>
+            </div>
+        @endcan
         <table id="adherent_list">
             <thead>
                 <tr>
@@ -38,9 +40,15 @@
                         @endforeach
                     </td>
                     <td>
-                        <a href="{{ route('adherents.show', ['adherent'=>$adherent]) }}">Details</a>
-                        <a href="{{ route('adherents.edit',['adherent'=>$adherent]) }}">Editer</a>
-                        <a href="{{ route('adherents.destroy', ['adherent'=>$adherent]) }}">Archiver</a>
+                        @can('view', $adherent)
+                            <a href="{{ route('adherents.show', ['adherent'=>$adherent]) }}">Details</a>
+                        @endcan
+                        @can('update', $adherent)
+                            <a href="{{ route('adherents.edit',['adherent'=>$adherent]) }}">Editer</a>
+                        @endcan
+                        @can('delete', $adherent)
+                            <a href="{{ route('adherents.destroy', ['adherent'=>$adherent]) }}">Archiver</a>
+                        @endcan
                     </td>
                 </tr>
             @endForeach
