@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdhesionsTable extends Migration
+class CreateAdherentsExpectationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateAdhesionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('adhesions', function (Blueprint $table) {
+        Schema::create('adherents_expectations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('adherent_id')
                 ->foreign('adherent_id')
                 ->references('id')
                 ->on(Adherent::class)
                 ->onDelete('cascade');
-            $table->string('amount')->nullable(true);
-            $table->string('year')->nullable(true);
+            $table->longText('comments')->nullable(true);
+
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +34,6 @@ class CreateAdhesionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adhesions');
+        Schema::dropIfExists('adherents_expectations');
     }
 }

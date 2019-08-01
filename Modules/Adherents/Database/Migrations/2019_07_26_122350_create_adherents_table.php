@@ -23,7 +23,7 @@ class CreateAdherentsTable extends Migration
             $table->string('city',255)->nullable(true);
             $table->string('phone_number',255)->nullable(true);
             $table->string('mobile_number',255)->nullable(true);
-            $table->string('is_archived',255)->nullable(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

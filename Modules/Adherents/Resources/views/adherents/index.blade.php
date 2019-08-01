@@ -4,7 +4,7 @@
 @section('content')
     <p>
         <div>
-            <a href="{{route('adherentsCreate')}}">Nouvel Adherent</a>
+            <a href="{{route('adherents.create')}}">Nouvel Adherent</a>
         </div>
         <table id="adherent_list">
             <thead>
@@ -33,13 +33,14 @@
                     <td>{{ $adherent->zip }}</td>
                     <td>{{ $adherent->city }}</td>
                     <td>
-                        @foreach($adherent->mails() as $mail) 
+                        @foreach($adherent->adherentsMails as $mail) 
                             {{ $mail->email }} ({{ $mail->usage }})<br>
                         @endforeach
                     </td>
                     <td>
-                        <a href="{{ route('adherentsShow', ['id'=>$adherent->id]) }}">Details</a>
-                        <a href="{{ route('adherentsDestroy', ['id'=>$adherent->id]) }}">Archiver</a>
+                        <a href="{{ route('adherents.show', ['adherent'=>$adherent]) }}">Details</a>
+                        <a href="{{ route('adherents.edit',['adherent'=>$adherent]) }}">Editer</a>
+                        <a href="{{ route('adherents.destroy', ['adherent'=>$adherent]) }}">Archiver</a>
                     </td>
                 </tr>
             @endForeach

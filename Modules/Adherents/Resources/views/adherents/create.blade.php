@@ -4,9 +4,9 @@
 @section('content')
     <p>
         <div>
-            <a href="{{route('adherents')}}">Retour liste des adherent</a>
+            <a href="{{route('adherents.index')}}">Retour liste des adherent</a>
         </div>
-        <form id="adherent_create_form" action="{{route('adherentsStore')}}" method="post" >
+        <form id="adherent_create_form" action="{{route('adherents.store')}}" method="post" >
             @csrf
             @foreach ($errors->all() as $error)
                 <p class="error">{{ $error }}</p>
@@ -22,4 +22,4 @@
             <input value="Enregistrer" type="submit">       
         </form>
     </p>
-@stop
+@endsection

@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Adherents\Entities;
+namespace Modules\Adherents\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdherentExpectation extends Model
+class AdherentsExpectation extends Model
 {
     protected $fillable = [];
 }

@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Modules\Menus\Entities\Menu;
 
-class CreateAdherentMenusTable extends Migration
+class CreateAdherentsMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,7 @@ class CreateAdherentMenusTable extends Migration
         $menu->label="Adherents";
         $menu->order=10;
         $menu->type=Menu::MENU_TYPES[0];
-        $menu->url='adherents';
+        $menu->url='adherents.index';
         $menu->save();
     }
 
